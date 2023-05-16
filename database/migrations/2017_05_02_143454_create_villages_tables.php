@@ -22,8 +22,8 @@ class CreateVillagesTables extends Migration
     {
         Schema::create('villages', function(Blueprint $table){
             $table->uuid('id')->primary();
+            $table->uuid('district_id');
             $table->string('name', 50);
-            $table->string('district_id', 36);
         });
     }
 

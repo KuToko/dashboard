@@ -22,8 +22,8 @@ class CreateRegenciesTables extends Migration
     {
         Schema::create('regencies', function(Blueprint $table){
             $table->uuid('id')->primary();
+            $table->uuid('province_id');
             $table->string('name', 50);
-            $table->string('province_id', 36);
         });
     }
 

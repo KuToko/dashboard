@@ -22,8 +22,8 @@ class CreateDistrictsTables extends Migration
     {
         Schema::create('districts', function(Blueprint $table){
             $table->uuid('id')->primary();
+            $table->uuid('regency_id');
             $table->string('name', 50);
-            $table->string('regency_id', 36);
         });
     }
 

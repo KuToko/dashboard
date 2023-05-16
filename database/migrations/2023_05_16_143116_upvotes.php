@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('upvotes', function(Blueprint $table){
             $table->uuid('id')->primary();
-            $table->string('username');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->boolean('is_superadmin')->default(false);
+            $table->uuid('user_id')->nullable();
+            $table->uuid('bussiness_id');
             $table->timestamp('created_at');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('bussiness_id')->references('id')->on('bussiness')->onDelete('cascade');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('upvotes');
     }
 };
