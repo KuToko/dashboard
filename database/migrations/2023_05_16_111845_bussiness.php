@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('bussiness', function(Blueprint $table){
             $table->uuid('id')->primary();
-            $table->uuid('category_id')->nullable();
             $table->uuid('claim_by')->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('province_id')->nullable();
@@ -71,13 +70,12 @@ return new class extends Migration
             $table->time('sunday_end_time');
             $table->string('sunday_notes');
             
-            $table->foreign('category_id')->references('id')->on('category_bussiness')->onDelete('set null');
-            $table->foreign('claim_by')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('set null');
-            $table->foreign('regency_id')->references('id')->on('regencies')->onDelete('set null');
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('set null');
-            $table->foreign('village_id')->references('id')->on('villages')->onDelete('set null');
+            $table->foreign('claim_by')->references('id')->on('users');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('province_id')->references('id')->on('provinces');
+            $table->foreign('regency_id')->references('id')->on('regencies');
+            $table->foreign('district_id')->references('id')->on('districts');
+            $table->foreign('village_id')->references('id')->on('villages');
 
         });
     }

@@ -39,7 +39,10 @@ class DatabaseSeeder extends Seeder
             unset($province['original_id']);
             return $province;
         });
-        DB::table('provinces')->insert($provincesWithoutOriginalId->toArray());
+        $chunck = array_chunk($provincesWithoutOriginalId->toArray(), 6500, true);
+        foreach ($chunck as $data) {
+            DB::table('provinces')->insert($data);
+        }
 
         $regencies = RawDataGetter::getRegencies();
         $regencies = collect($regencies)->map(function($regency) use ($provinces) {
@@ -53,7 +56,10 @@ class DatabaseSeeder extends Seeder
             unset($regency['original_id']);
             return $regency;
         })->where('province_id', '!=', null);
-        DB::table('regencies')->insert($regenciesWithoutOriginalId->toArray());
+        $chunck = array_chunk($regenciesWithoutOriginalId->toArray(), 6500, true);
+        foreach ($chunck as $data) {
+            DB::table('regencies')->insert($data);
+        }
 
         $districts = RawDataGetter::getDistricts();
         $districts = collect($districts)->map(function($district) use ($regencies) {
@@ -67,7 +73,11 @@ class DatabaseSeeder extends Seeder
             unset($district['original_id']);
             return $district;
         })->where('regency_id', '!=', null);
-        DB::table('districts')->insert($districtsWithoutOriginalId->toArray());
+        $chunck = array_chunk($districtsWithoutOriginalId->toArray(), 6500, true);
+        foreach ($chunck as $data) {
+            DB::table('districts')->insert($data);
+        }
+        // DB::table('districts')->insert($districtsWithoutOriginalId->toArray());
 
         $villages = RawDataGetter::getVillages();
         $villages = collect($villages)->map(function($village) use ($districts) {
@@ -81,6 +91,10 @@ class DatabaseSeeder extends Seeder
             unset($village['original_id']);
             return $village;
         })->where('district_id', '!=', null);
-        DB::table('villages')->insert($villagesWithoutOriginalId->toArray());
+        $chunck = array_chunk($villagesWithoutOriginalId->toArray(), 6500, true);
+        foreach ($chunck as $data) {
+            DB::table('villages')->insert($data);
+        }
+        // DB::table('villages')->insert($villagesWithoutOriginalId->toArray());
     }
 }

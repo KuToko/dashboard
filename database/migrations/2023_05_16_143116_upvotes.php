@@ -15,10 +15,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable();
             $table->uuid('bussiness_id');
-            $table->timestamp('created_at');
+            $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('bussiness_id')->references('id')->on('bussiness')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('bussiness_id')->references('id')->on('bussiness');
         });
     }
 

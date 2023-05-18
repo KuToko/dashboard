@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('links', function(Blueprint $table){
+        Schema::create('reservation_details', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('bussiness_id');
-            $table->string('name');
-            $table->string('link');
+            $table->uuid('reservation_id');
+            $table->uuid('space_id');
             $table->timestamps();
 
-            $table->foreign('bussiness_id')->references('id')->on('bussiness');
+            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreign('space_id')->references('id')->on('spaces');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('links');
+        Schema::dropIfExists('reservation_details');
     }
 };

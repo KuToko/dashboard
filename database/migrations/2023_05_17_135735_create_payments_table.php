@@ -11,14 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tokens', function(Blueprint $table){
+        Schema::create('payments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id');
-            $table->string('token');
-            $table->timestamps();
+            $table->uuid('payment_method_id');
+            $table->boolean('is_paid')->default(false);
             $table->timestamp('expired_at');
+            $table->string('payment_url');
+            $table->string('status');
+            $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods');
+
         });
     }
 
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tokens');
+        Schema::dropIfExists('payments');
     }
 };

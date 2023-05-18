@@ -16,10 +16,10 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->uuid('bussiness_id');
             $table->text('feedbacks')->nullable();
-            $table->timestamp('created_at');
+            $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('bussiness_id')->references('id')->on('bussiness')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('bussiness_id')->references('id')->on('bussiness');
         });
     }
 
