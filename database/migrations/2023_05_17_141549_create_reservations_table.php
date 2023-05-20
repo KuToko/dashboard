@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('bussiness_id');
+            $table->uuid('business_id');
             $table->uuid('payment_id');
             $table->uuid('user_id');
             $table->timestamp('start_date');
             $table->timestamp('end_date');
             $table->timestamps();
 
-            $table->foreign('bussiness_id')->references('id')->on('bussiness');
+            $table->foreign('business_id')->references('id')->on('businesses');
             $table->foreign('payment_id')->references('id')->on('payments');
             $table->foreign('user_id')->references('id')->on('users');
         });

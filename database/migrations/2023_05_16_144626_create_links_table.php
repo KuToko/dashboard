@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bussiness_categories', function (Blueprint $table) {
+        Schema::create('links', function(Blueprint $table){
             $table->uuid('id')->primary();
-            $table->uuid('category_id');
-            $table->uuid('bussiness_id');
+            $table->uuid('business_id');
+            $table->string('name');
+            $table->string('link');
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('bussiness_id')->references('id')->on('bussiness');
-
+            $table->foreign('business_id')->references('id')->on('businesses');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bussiness_categories');
+        Schema::dropIfExists('links');
     }
 };

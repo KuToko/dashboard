@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('feedbacks', function(Blueprint $table){
             $table->uuid('id')->primary();
             $table->uuid('user_id');
-            $table->uuid('bussiness_id');
+            $table->uuid('business_id');
             $table->text('feedbacks')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('bussiness_id')->references('id')->on('bussiness');
+            $table->foreign('business_id')->references('id')->on('businesses');
         });
     }
 

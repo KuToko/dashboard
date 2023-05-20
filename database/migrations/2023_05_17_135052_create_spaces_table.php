@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('spaces', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('bussiness_id');
+            $table->uuid('business_id');
             $table->string('code');
             $table->string('name');
             $table->string('photo');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->double('price');
             $table->timestamps();
 
-            $table->foreign('bussiness_id')->references('id')->on('bussiness');
+            $table->foreign('business_id')->references('id')->on('businesses');
         });
     }
 

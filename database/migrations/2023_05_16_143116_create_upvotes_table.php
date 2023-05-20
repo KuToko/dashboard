@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('upvotes', function(Blueprint $table){
             $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable();
-            $table->uuid('bussiness_id');
+            $table->uuid('business_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('bussiness_id')->references('id')->on('bussiness');
+            $table->foreign('business_id')->references('id')->on('businesses');
         });
     }
 

@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('links', function(Blueprint $table){
+        Schema::create('posts', function(Blueprint $table){
             $table->uuid('id')->primary();
-            $table->uuid('bussiness_id');
-            $table->string('name');
-            $table->string('link');
+            $table->uuid('user_id');
+            $table->uuid('business_id');
+            $table->text('content')->nullable();
+            $table->string('media')->nullable();
             $table->timestamps();
 
-            $table->foreign('bussiness_id')->references('id')->on('bussiness');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('business_id')->references('id')->on('businesses');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('links');
+        Schema::dropIfExists('posts');
     }
 };
