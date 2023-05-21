@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('longitude');
             $table->string('address');
             $table->string('postal_code', 6);
-            $table->string('avatar');
-            $table->string('description');
+            $table->string('avatar')->nullable();
+            $table->string('description')->nullable();
             $table->date('released_at')->nullable();
             $table->double('google_maps_rating');
             $table->timestamps();
