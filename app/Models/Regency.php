@@ -1,57 +1,51 @@
 <?php
 
-/*
- * This file is part of the IndoRegion package.
- *
- * (c) Azis Hapidin <azishapidin.com | azishapidin@gmail.com>
- *
+/**
+ * Created by Reliese Model.
  */
 
 namespace App\Models;
 
-use AzisHapidin\IndoRegion\Traits\RegencyTrait;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Regency Model.
+ * Class Regency
+ * 
+ * @property uuid $id
+ * @property uuid $province_id
+ * @property string $name
+ * 
+ * @property Collection|Business[] $businesses
+ *
+ * @package App\Models
  */
 class Regency extends Model
 {
-    use RegencyTrait;
+	protected $table = 'regencies';
+	public $incrementing = false;
+	public $keyType = 'uuid';
+	public $timestamps = false;
 
-    /**
-     * Table name.
-     *
-     * @var string
-     */
-    protected $table = 'regencies';
+	protected $casts = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'province_id'
-    ];
+	protected $fillable = [
+		'province_id',
+		'name'
+	];
 
-    /**
-     * Regency belongs to Province.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function province()
-    {
-        return $this->belongsTo(Province::class);
-    }
+	public function businesses()
+	{
+		return $this->hasMany(Business::class);
+	}
 
-    /**
-     * Regency has many districts.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function districts()
-    {
-        return $this->hasMany(District::class);
-    }
+	public function province()
+	{
+		return $this->belongsTo(Province::class);
+	}
+
+	public function districts()
+	{
+		return $this->hasMany(District::class);
+	}
 }

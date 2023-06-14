@@ -1,48 +1,46 @@
 <?php
 
-/*
- * This file is part of the IndoRegion package.
- *
- * (c) Azis Hapidin <azishapidin.com | azishapidin@gmail.com>
- *
+/**
+ * Created by Reliese Model.
  */
 
 namespace App\Models;
 
-use AzisHapidin\IndoRegion\Traits\VillageTrait;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\District;
 
 /**
- * Village Model.
+ * Class Village
+ * 
+ * @property uuid $id
+ * @property uuid $district_id
+ * @property string $name
+ * 
+ * @property Collection|Business[] $businesses
+ *
+ * @package App\Models
  */
 class Village extends Model
 {
-    use VillageTrait;
+	protected $table = 'villages';
+	public $incrementing = false;
+	public $keyType = 'uuid';
+	public $timestamps = false;
 
-    /**
-     * Table name.
-     *
-     * @var string
-     */
-    protected $table = 'villages';
+	protected $casts = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'district_id'
-    ];
+	protected $fillable = [
+		'district_id',
+		'name'
+	];
 
-	/**
-     * Village belongs to District.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function district()
-    {
-        return $this->belongsTo(District::class);
-    }
+	public function businesses()
+	{
+		return $this->hasMany(Business::class);
+	}
+
+	public function district()
+	{
+		return $this->belongsTo(District::class);
+	}
 }
