@@ -1,37 +1,44 @@
 <?php
 
-/*
- * This file is part of the IndoRegion package.
- *
- * (c) Azis Hapidin <azishapidin.com | azishapidin@gmail.com>
- *
+/**
+ * Created by Reliese Model.
  */
 
 namespace App\Models;
 
-use AzisHapidin\IndoRegion\Traits\ProvinceTrait;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Province Model.
+ * Class Province
+ * 
+ * @property uuid $id
+ * @property string $name
+ * 
+ * @property Collection|Business[] $businesses
+ *
+ * @package App\Models
  */
 class Province extends Model
 {
-    use ProvinceTrait;
-    /**
-     * Table name.
-     *
-     * @var string
-     */
-    protected $table = 'provinces';
+	protected $table = 'provinces';
+	public $incrementing = false;
+	public $keyType = 'uuid';
+	public $timestamps = false;
 
-    /**
-     * Province has many regencies.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function regencies()
-    {
-        return $this->hasMany(Regency::class);
-    }
+	protected $casts = [];
+
+	protected $fillable = [
+		'name'
+	];
+
+	public function businesses()
+	{
+		return $this->hasMany(Business::class);
+	}
+
+	public function regencies()
+	{
+		return $this->hasMany(Regency::class);
+	}
 }
