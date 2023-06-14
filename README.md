@@ -27,7 +27,7 @@ git clone https://github.com/KuToko/dashboard.git
 2. Navigate to the project directory:
 
 ```
-cd repo
+cd dashboard
 ```
 
 3. Install dependencies using Composer:
