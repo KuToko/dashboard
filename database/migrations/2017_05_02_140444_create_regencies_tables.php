@@ -9,6 +9,7 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateRegenciesTables extends Migration
@@ -20,8 +21,8 @@ class CreateRegenciesTables extends Migration
      */
     public function up()
     {
-        Schema::create('regencies', function(Blueprint $table){
-            $table->uuid('id')->primary();
+        Schema::create('regencies', function (Blueprint $table) {
+            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
             $table->uuid('province_id');
             $table->string('name', 50);
         });

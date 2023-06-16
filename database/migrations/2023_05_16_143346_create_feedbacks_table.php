@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,8 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedbacks', function(Blueprint $table){
-            $table->uuid('id')->primary();
+        Schema::create('feedbacks', function (Blueprint $table) {
+            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
             $table->uuid('user_id');
             $table->uuid('business_id');
             $table->text('feedbacks')->nullable();

@@ -9,6 +9,7 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateProvincesTables extends Migration
@@ -20,8 +21,8 @@ class CreateProvincesTables extends Migration
      */
     public function up()
     {
-        Schema::create('provinces', function(Blueprint $table){
-            $table->uuid('id')->primary();
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
             $table->string('name');
         });
     }

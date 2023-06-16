@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\WebController::class, 'index'])->name('landing.index');
-Route::get('/privacy', [\App\Http\Controllers\WebController::class, 'privacy'])->name('landing.privacy');
-Route::get('/contact', [\App\Http\Controllers\WebController::class, 'contact'])->name('landing.contact');
+Route::get('/', function () {
+  return view('welcome');
+});

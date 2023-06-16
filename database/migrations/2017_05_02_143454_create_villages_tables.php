@@ -9,6 +9,7 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateVillagesTables extends Migration
@@ -20,8 +21,8 @@ class CreateVillagesTables extends Migration
      */
     public function up()
     {
-        Schema::create('villages', function(Blueprint $table){
-            $table->uuid('id')->primary();
+        Schema::create('villages', function (Blueprint $table) {
+            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
             $table->uuid('district_id');
             $table->string('name', 50);
         });
